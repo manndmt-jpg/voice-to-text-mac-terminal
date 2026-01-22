@@ -1,6 +1,8 @@
 # Voice to Text Mac Terminal
 
-Local voice-to-text for macOS. Transcribe speech offline using WhisperKit - no API keys, no cloud, no costs. Perfect for voice-controlling Claude Code or any terminal workflow.
+Local voice-to-text for macOS. Transcribe speech offline using WhisperKit - no API keys, no cloud, no costs.
+
+Works with any app - Cursor, VS Code, Claude Code, browsers, Slack, or anywhere you type.
 
 ## How It Works
 
@@ -36,12 +38,12 @@ The app appears in your menu bar.
 
 ## Permissions
 
-Grant these in **System Settings > Privacy & Security**:
+Grant these in **System Settings > Privacy & Security** to the terminal app that launches the executable (iTerm, Terminal, etc.):
 
-1. **Accessibility** - Add your terminal app (iTerm, Terminal, etc.)
-2. **Microphone** - Add your terminal app
+1. **Accessibility** - Required for global hotkeys
+2. **Microphone** - Required for voice recording
 
-Without these, hotkeys won't work and audio won't record.
+Once running, the app works globally in any application.
 
 ## Keyboard Shortcuts
 
