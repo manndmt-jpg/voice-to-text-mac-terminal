@@ -1,0 +1,9 @@
+.DS_Store
+.build/
+.vscode/
+.env
+
+# Local development notes
+CLAUDE.md
+HANDOFF.md
+SCRATCHPAD.md

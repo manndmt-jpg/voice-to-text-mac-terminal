@@ -1,0 +1,81 @@
+import Cocoa
+import SwiftUI
+
+enum ManagerTab: Int {
+    case settings = 0
+    case history = 1
+    case statistics = 2
+}
+
+class UnifiedManagerWindow: NSWindowController {
+    private var tabViewController: NSTabViewController!
+    private var historyViewController: TranscriptionHistoryViewController?
+    private var statsViewController: StatsViewController?
+    private var settingsController: SettingsWindowController?
+
+    override init(window: NSWindow?) {
+        // Create the main window
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 850, height: 600),
+            styleMask: [.titled, .closable, .resizable, .miniaturizable],
+            backing: .buffered,
+            defer: false
+        )
+        window.title = "Voice to Text"
+        window.minSize = NSSize(width: 600, height: 400)
+
+        super.init(window: window)
+
+        setupTabView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupTabView() {
+        tabViewController = NSTabViewController()
+        tabViewController.tabStyle = .toolbar
+
+        // Settings Tab
+        if settingsController == nil {
+            settingsController = SettingsWindowController()
+        }
+        let settingsViewController = NSViewController()
+        settingsViewController.view = settingsController!.window!.contentView!
+        let settingsTab = NSTabViewItem(viewController: settingsViewController)
+        settingsTab.label = "Settings"
+        settingsTab.image = NSImage(systemSymbolName: "gear", accessibilityDescription: "Settings")
+        tabViewController.addTabViewItem(settingsTab)
+
+        // History Tab
+        historyViewController = TranscriptionHistoryViewController()
+        let historyTab = NSTabViewItem(viewController: historyViewController!)
+        historyTab.label = "History"
+        historyTab.image = NSImage(systemSymbolName: "clock", accessibilityDescription: "History")
+        tabViewController.addTabViewItem(historyTab)
+
+        // Statistics Tab
+        statsViewController = StatsViewController()
+        let statsTab = NSTabViewItem(viewController: statsViewController!)
+        statsTab.label = "Statistics"
+        statsTab.image = NSImage(systemSymbolName: "chart.bar", accessibilityDescription: "Statistics")
+        tabViewController.addTabViewItem(statsTab)
+
+        window?.contentViewController = tabViewController
+    }
+
+    func showWindow(tab: ManagerTab? = nil) {
+        if let tab = tab {
+            tabViewController.selectedTabViewItemIndex = tab.rawValue
+
+            if tab == .history {
+                historyViewController?.refreshHistory()
+            }
+        }
+
+        window?.center()
+        window?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+}
