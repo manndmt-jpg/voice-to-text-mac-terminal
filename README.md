@@ -75,6 +75,10 @@ Edit `config.json` to auto-correct common mistranscriptions:
 }
 ```
 
+## Credits
+
+Based on [super-voice-assistant](https://github.com/ykdojo/super-voice-assistant) by ykdojo.
+
 ## License
 
 MIT - see [LICENSE](LICENSE).
