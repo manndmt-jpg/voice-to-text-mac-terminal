@@ -53,6 +53,15 @@ Once running, the app works globally in any application.
 | **Cmd+Option+A** | Show transcription history |
 | **Escape** | Cancel recording |
 
+## Models
+
+Uses [WhisperKit](https://github.com/argmaxinc/WhisperKit) with CoreML models from [Hugging Face](https://huggingface.co/argmaxinc/whisperkit-coreml). Models download on first use via Settings and run entirely on-device.
+
+Available models:
+- **Distil Large V3** - Fast, English-optimized (recommended)
+- **Large V3 Turbo** - Balanced speed/accuracy
+- **Large V3** - Highest accuracy, slower
+
 ## Text Replacements
 
 Edit `config.json` to auto-correct common mistranscriptions:
