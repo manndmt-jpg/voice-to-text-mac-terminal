@@ -62,6 +62,34 @@ Available models:
 - **Large V3 Turbo** - Balanced speed/accuracy
 - **Large V3** - Highest accuracy, slower
 
+## Quick Launch Setup
+
+The app must be launched from a terminal with Accessibility permission for auto-paste to work. Do not wrap it in an `.app` bundle or `.command` file directly — this breaks paste functionality.
+
+**Shell aliases** (add to `~/.zshrc`):
+
+```bash
+alias sva='pkill -f SuperVoiceAssistant 2>/dev/null; cd ~/Projects/voice-to-text-mac-terminal && swift build && .build/debug/SuperVoiceAssistant & cd - > /dev/null'
+alias sva-start='pkill -f SuperVoiceAssistant 2>/dev/null; ~/Projects/voice-to-text-mac-terminal/.build/debug/SuperVoiceAssistant &'
+```
+
+- `sva` — rebuild and launch
+- `sva-start` — launch existing build
+
+**Clickable launcher** (auto-start on login):
+
+Create a launcher app that opens Terminal briefly to preserve Accessibility permissions:
+
+```bash
+osacompile -o ~/Applications/SuperVoiceAssistant.app -e '
+tell application "Terminal"
+    do script "pkill -f SuperVoiceAssistant 2>/dev/null; sleep 1; cd ~/Projects/voice-to-text-mac-terminal && nohup .build/debug/SuperVoiceAssistant &>/dev/null & disown; sleep 1; exit"
+    activate
+end tell'
+```
+
+Then add `~/Applications/SuperVoiceAssistant.app` to **System Settings > General > Login Items** for auto-start.
+
 ## Text Replacements
 
 Edit `config.json` to auto-correct common mistranscriptions:

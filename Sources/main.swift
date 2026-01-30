@@ -321,7 +321,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, AudioTranscriptionManagerDel
 let app = NSApplication.shared
 let delegate = AppDelegate()
 app.delegate = delegate
-app.setActivationPolicy(.regular)
+app.setActivationPolicy(.accessory)
 
 // Set the app icon
 if let iconURL = Bundle.module.url(forResource: "AppIcon", withExtension: "icns"),
